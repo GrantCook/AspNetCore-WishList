@@ -12,9 +12,9 @@ namespace WishList.Controllers
     {
         private readonly ApplicationDbContext _context;
 
-        public ItemController(ApplicationDbContext dbContext)
+        public ItemController(ApplicationDbContext context)
         {
-            this._context = dbContext;
+            _context = context;
         }
 
         public IActionResult Index()
@@ -40,7 +40,7 @@ namespace WishList.Controllers
 
         public IActionResult Delete(int id)
         {
-            var existingItem = _context.Items.SingleOrDefault(i => i.Id == id);
+            var existingItem = _context.Items.FirstOrDefault(i => i.Id == id);
             _context.Items.Remove(existingItem);
             _context.SaveChanges();
 
